@@ -26,6 +26,7 @@ class VirtualBoxDefinition(MachineDefinition):
         assert x is not None
         self.memory_size = x.find("attr[@name='memorySize']/int").get("value")
         self.headless = x.find("attr[@name='headless']/bool").get("value") == "true"
+        self.hostBridgedInterface = x.find("attr[@name='hostBridgedInterface']/string").get("value")
 
         def f(xml):
             return {'port': int(xml.find("attrs/attr[@name='port']/int").get("value")),
@@ -366,6 +367,7 @@ class VirtualBoxState(MachineState):
                  "--memory", defn.memory_size, "--vram", "10",
                  "--nictype1", "virtio", "--nictype2", "virtio",
                  "--nic2", "hostonly", "--hostonlyadapter2", "vboxnet0",
+                 "--nic3", "bridged", "--bridgeadapter3", defn.hostBridgedInterface,
                  "--nestedpaging", "off"])
 
             self._headless = defn.headless

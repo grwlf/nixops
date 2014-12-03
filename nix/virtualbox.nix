@@ -34,6 +34,15 @@ in
       '';
     };
 
+    deployment.virtualbox.hostBridgedInterface = mkOption {
+      default = "";
+      type = types.string;
+      description = ''
+        If set, the VirtualBox instance is started with additional network
+        interface bridged to the Host's interface specified by this option.
+      '';
+    };
+
     deployment.virtualbox.disks = mkOption {
       default = {};
       example =
