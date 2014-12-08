@@ -46,6 +46,7 @@ in
     deployment.virtualbox.guestBridgedMac = mkOption {
       default = "";
       type = types.string;
+      example = "00:22:33:44:55:00";
       description = ''
         Sets the MAC address of guests's interface, bridged with Host's
         interface specified with hostBridgedInterface.

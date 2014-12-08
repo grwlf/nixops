@@ -369,7 +369,7 @@ class VirtualBoxState(MachineState):
                  "--nictype1", "virtio", "--nictype2", "virtio",
                  "--nic2", "hostonly", "--hostonlyadapter2", "vboxnet0"] +
                 ((["--nic3", "bridged", "--bridgeadapter3", defn.hostBridgedInterface] +
-                    (["--macaddress3", defn.guestBridgedMac] if defn.guestBridgedMac != "" else []))
+                    (["--macaddress3", defn.guestBridgedMac.translate(None, ":-")] if defn.guestBridgedMac != "" else []))
                     if defn.hostBridgedInterface != "" else []) +
                  ["--nestedpaging", "off"])
 
