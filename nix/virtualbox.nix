@@ -43,6 +43,15 @@ in
       '';
     };
 
+    deployment.virtualbox.guestBridgedMac = mkOption {
+      default = "";
+      type = types.string;
+      description = ''
+        Sets the MAC address of guests's interface, bridged with Host's
+        interface specified with hostBridgedInterface.
+      '';
+    };
+
     deployment.virtualbox.disks = mkOption {
       default = {};
       example =

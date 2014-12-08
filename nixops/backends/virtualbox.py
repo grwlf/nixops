@@ -27,6 +27,7 @@ class VirtualBoxDefinition(MachineDefinition):
         self.memory_size = x.find("attr[@name='memorySize']/int").get("value")
         self.headless = x.find("attr[@name='headless']/bool").get("value") == "true"
         self.hostBridgedInterface = x.find("attr[@name='hostBridgedInterface']/string").get("value")
+        self.guestBridgedMac = x.find("attr[@name='guestBridgedMac']/string").get("value")
 
         def f(xml):
             return {'port': int(xml.find("attrs/attr[@name='port']/int").get("value")),
