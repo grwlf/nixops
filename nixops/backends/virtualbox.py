@@ -366,9 +366,10 @@ class VirtualBoxState(MachineState):
                 ["VBoxManage", "modifyvm", self.vm_id,
                  "--memory", defn.memory_size, "--vram", "10",
                  "--nictype1", "virtio", "--nictype2", "virtio",
-                 "--nic2", "hostonly", "--hostonlyadapter2", "vboxnet0"] ++
-                 (["--nic3", "bridged", "--bridgeadapter3", defn.hostBridgedInterface]
-                    if defn.hostBridgedInterface != "" else []) ++
+                 "--nic2", "hostonly", "--hostonlyadapter2", "vboxnet0"] +
+                ((["--nic3", "bridged", "--bridgeadapter3", defn.hostBridgedInterface] +
+                    (["--macaddress3", defn.guestBridgedMac] if defn.guestBridgedMac != "" else []))
+                    if defn.hostBridgedInterface != "" else []) +
                  ["--nestedpaging", "off"])
 
             self._headless = defn.headless
